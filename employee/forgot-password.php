@@ -35,7 +35,7 @@ echo "<script>alert('Email id or Mobile no is invalid');</script>";
 <html lang="en">
 <head>
 	
-	<title>ODLMS - Forgot Page</title>
+	<title>VECTOR LAB - Forgot Page</title>
 	
 
 	<link rel="stylesheet" href="libs/bower/font-awesome/css/font-awesome.min.css">

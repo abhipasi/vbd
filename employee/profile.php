@@ -30,7 +30,7 @@ $query->execute();
 <html lang="en">
 <head>
   
-  <title>ODLMS - Employee Profile</title>
+  <title>VECTOR LAB - Employee Profile</title>
   
   <link rel="stylesheet" href="libs/bower/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="libs/bower/material-design-iconic-font/dist/css/material-design-iconic-font.css">
