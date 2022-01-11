@@ -195,7 +195,7 @@
 	<div class="footer-section">
 						<div class="container">
 							<div class="footer-bottom">
-						<p>Online Diagnostic Lab Management System @ 2020</p>
+						<p>Vector Lab Management System @ 2022</p>
 									</div>
 							<script type="text/javascript">
 						$(document).ready(function() {
