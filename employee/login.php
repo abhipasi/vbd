@@ -52,11 +52,11 @@ echo "<script>alert('Invalid Details');</script>";
 		<div class="simple-page-logo animated swing">
 			
 				<span style="color: white"><i class="fa fa-gg"></i></span>
-				<span style="color: white">ANDHA PAV</span>
+				<span style="color: white">VECTOR LAB</span>
 			
 		</div><!-- logo -->
 		<div class="simple-page-form animated flipInY" id="login-form">
-	<h4 class="form-title m-b-xl text-center">Sign In With Your ANDHA PAV Account</h4>
+	<h4 class="form-title m-b-xl text-center">Sign In With Your VECTOR LAB Account</h4>
 	<form action="#" method="post" name="login">
 		<div class="form-group">
 			<input type="text" class="form-control" placeholder="Employee ID" required="true" name="empid">
