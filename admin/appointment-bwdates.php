@@ -11,7 +11,7 @@ if (strlen($_SESSION['odlmsaid']==0)) {
 <html lang="en">
 <head>
   
-  <title>ODLMS - Appointment Between Dates Report</title>
+  <title>VECTOR LAB - Appointment Between Dates Report</title>
   
   <link rel="stylesheet" href="libs/bower/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="libs/bower/material-design-iconic-font/dist/css/material-design-iconic-font.css">
