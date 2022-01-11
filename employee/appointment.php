@@ -75,7 +75,7 @@ echo '<script>alert("Your Appointment has been taken successfully. Appointment n
 <html lang="en">
 <head>
 	
-	<title>ODLMS || Appointment Form</title>
+	<title>VECTOR LAB || Appointment Form</title>
 	
 	<link rel="stylesheet" href="libs/bower/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" href="libs/bower/material-design-iconic-font/dist/css/material-design-iconic-font.css">
