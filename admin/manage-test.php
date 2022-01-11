@@ -14,7 +14,7 @@ if (strlen($_SESSION['odlmsaid']==0)) {
 <head>
 	
 	
-	<title>ODLMS - Manage Test Detail</title>
+	<title>VECTOR LAB - Manage Test Detail</title>
 	
 	<link rel="stylesheet" href="libs/bower/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" href="libs/bower/material-design-iconic-font/dist/css/material-design-iconic-font.css">

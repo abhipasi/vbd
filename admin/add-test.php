@@ -41,7 +41,7 @@ echo "<script>window.location.href ='add-test.php'</script>";
 <html lang="en">
 <head>
   
-  <title>ODLMS - Add Test Detail</title>
+  <title>VECTOR LAB - Add Test Detail</title>
   
   <link rel="stylesheet" href="libs/bower/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="libs/bower/material-design-iconic-font/dist/css/material-design-iconic-font.css">

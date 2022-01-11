@@ -34,7 +34,7 @@ $query->bindParam(':eid',$eid,PDO::PARAM_STR);
 <html lang="en">
 <head>
   
-  <title>ODLMS - Update Test Detail</title>
+  <title>VECTOR LAB - Update Test Detail</title>
   
   <link rel="stylesheet" href="libs/bower/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="libs/bower/material-design-iconic-font/dist/css/material-design-iconic-font.css">
