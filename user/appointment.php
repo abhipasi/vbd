@@ -2,6 +2,10 @@
 session_start();
 error_reporting(0);
 include('includes/dbconnection.php');
+$sql="select id,name from country";
+$query=$dbh->prepare($sql);
+$query->execute();
+$arrCountry=$query->fetchAll(PDO::FETCH_ASSOC);
 if (strlen($_SESSION['odlmsuid']==0)) {
   header('location:logout.php');
   } else{
@@ -17,6 +21,10 @@ $mobnum=$_POST['mobnum'];
 $email=$_POST['email'];
 $aptdate=$_POST['aptdate'];
 $apttime=$_POST['apttime'];
+$country=$_POST['country'];
+$state=$_POST['state'];
+$city=$_POST['city'];
+
 $aptnumber=mt_rand(100000000, 999999999);
 $pres=$_FILES["pres"]["name"];
 $extension = substr($pres,strlen($pres)-4,strlen($pres));
@@ -32,7 +40,7 @@ else
 $pres=md5($pres).time().$extension;
  move_uploaded_file($_FILES["pres"]["tmp_name"],"images/".$pres);
  
-$sql="insert into tblappointment(UserID,AppointmentNumber,PatientName,Gender,DOB,MobileNumber,Email,AppointmentDate,AppointmentTime,Prescription)values(:uid,:aptnumber,:pname,:gender,:dob,:mobnum,:email,:aptdate,:apttime,:pres)";
+$sql="insert into tblappointment(UserID,AppointmentNumber,PatientName,Gender,DOB,MobileNumber,Email,AppointmentDate,AppointmentTime,Prescription,UsrCountry,UsrState,UsrCity)values(:uid,:aptnumber,:pname,:gender,:dob,:mobnum,:email,:aptdate,:apttime,:pres,:country,:state,:city)";
 $query=$dbh->prepare($sql);
 $query->bindParam(':pname',$pname,PDO::PARAM_STR);
 $query->bindParam(':gender',$gender,PDO::PARAM_STR);
@@ -44,6 +52,10 @@ $query->bindParam(':apttime',$apttime,PDO::PARAM_STR);
 $query->bindParam(':pres',$pres,PDO::PARAM_STR);
 $query->bindParam(':aptnumber',$aptnumber,PDO::PARAM_STR);
 $query->bindParam(':uid',$uid,PDO::PARAM_STR);
+$query->bindParam(':country',$country,PDO::PARAM_STR);
+$query->bindParam(':state',$state,PDO::PARAM_STR);
+$query->bindParam(':city',$city,PDO::PARAM_STR);
+
 
  $query->execute();
 
@@ -74,7 +86,7 @@ echo '<script>alert("Your Appointment has been taken successfully. Appointment n
  else {
 
  
-$sql="insert into tblappointment(UserID,AppointmentNumber,PatientName,Gender,DOB,MobileNumber,Email,AppointmentDate,AppointmentTime)values(:uid,:aptnumber,:pname,:gender,:dob,:mobnum,:email,:aptdate,:apttime)";
+$sql="insert into tblappointment(UserID,AppointmentNumber,PatientName,Gender,DOB,MobileNumber,Email,AppointmentDate,AppointmentTime,UsrCountry,UsrState,UsrCity)values(:uid,:aptnumber,:pname,:gender,:dob,:mobnum,:email,:aptdate,:apttime,:country,:state,:city)";
 $query=$dbh->prepare($sql);
 $query->bindParam(':pname',$pname,PDO::PARAM_STR);
 $query->bindParam(':gender',$gender,PDO::PARAM_STR);
@@ -85,6 +97,9 @@ $query->bindParam(':aptdate',$aptdate,PDO::PARAM_STR);
 $query->bindParam(':apttime',$apttime,PDO::PARAM_STR);
 $query->bindParam(':aptnumber',$aptnumber,PDO::PARAM_STR);
 $query->bindParam(':uid',$uid,PDO::PARAM_STR);
+$query->bindParam(':country',$country,PDO::PARAM_STR);
+$query->bindParam(':state',$state,PDO::PARAM_STR);
+$query->bindParam(':city',$city,PDO::PARAM_STR);
 
  $query->execute();
 
@@ -117,7 +132,7 @@ echo '<script>alert("Your Appointment has been taken successfully. Appointment n
 <html lang="en">
 <head>
 	
-	<title>ODLMS || Appointment Form</title>
+	<title>VECTOR LAB || Appointment Form</title>
 	
 	<link rel="stylesheet" href="libs/bower/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" href="libs/bower/material-design-iconic-font/dist/css/material-design-iconic-font.css">
@@ -131,6 +146,8 @@ echo '<script>alert("Your Appointment has been taken successfully. Appointment n
 	<!-- endbuild -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,500,600,700,800,900,300">
 	<script src="libs/bower/breakpoints.js/dist/breakpoints.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script>
 		Breakpoints();
 	</script>
@@ -161,36 +178,65 @@ echo '<script>alert("Your Appointment has been taken successfully. Appointment n
 						<form method="post" enctype="multipart/form-data">
               <div class="form-group">
                 <label for="exampleInputEmail1">Patient Name</label>
-                <input type="text" class="form-control" id="pname" name="pname" required="true">
+                <input type="text" class="form-control" id="pname" name="pname" required="false">
               </div>
 							<div class="form-group">
 								<label for="exampleInputEmail1">Patient Gender</label>
 							<label>
-              <input type="radio" name="gender" id="gender" value="Female" checked="true">Female</label>
+              <input type="radio" name="gender" id="gender" value="Female" checked="false">Female</label>
               <label>
               <input type="radio" name="gender" id="gender" value="Male">Male
               </label>
 							</div>
               <div class="form-group">
                 <label for="exampleInputEmail1">Date of Birth</label>
-                <input type="date" class="form-control" id="dob" name="dob" required="true">
+                <input type="date" class="form-control" id="dob" name="dob" required="false">
               </div>
               <div class="form-group">
                 <label for="exampleInputEmail1">Mobile Number</label>
-                <input type="text" class="form-control" id="mobnum" name="mobnum" maxlength="10" pattern="[0-9]+" required="true">
+                <input type="text" class="form-control" id="mobnum" name="mobnum" maxlength="10" pattern="[0-9]+" required="false">
               </div>
               <div class="form-group">
                 <label for="exampleInputEmail1">Email ID</label>
-                <input type="email" class="form-control" id="email" name="email" required="true">
+                <input type="email" class="form-control" id="email" name="email" required="false">
               </div>
 							<div class="form-group">
 								<label for="exampleInputPassword1">Appointment Date</label>
-								<input type="date" class="form-control" id="aptdate" required="true" name="aptdate">
+								<input type="date" class="form-control" id="aptdate" required="false" name="aptdate">
 							</div>
               <div class="form-group">
                 <label for="exampleInputPassword1">Appointment Time</label>
                 <input type="time" class="form-control" id="apttime" name="apttime" required="true">
               </div>
+
+			  <div class="form-group">
+                <label for="InputCountry">Country</label>
+                <select class="form-control" id="country" name="country">
+							<option value="-1">Select Country</option>
+							<?php
+							foreach($arrCountry as $country){
+								?>
+								<option value="<?php echo $country['name']?>"><?php echo $country['name']?></option>
+								<?php
+							}
+							?>
+						</select>
+              </div>
+
+			  <div class="form-group">
+				<label for="state">State</label>
+						<select class="form-control" id="state" name="state">
+							<option>Select State</option>
+						</select>
+              </div>
+			  <div class="form-group">
+			  <label for="city">City</label>
+						<select class="form-control" id="city" name="city">
+							<option>Select City</option>
+						</select>
+              </div>
+			
+			  
 							<div class="form-group">
 								<label for="exampleInputFile">Prescription(if any)</label>
 								<input type="file" id="pres" class="form-control" name="pres">
@@ -262,6 +308,48 @@ foreach($results as $row)
 	<script src="libs/bower/moment/moment.js"></script>
 	<script src="libs/bower/fullcalendar/dist/fullcalendar.min.js"></script>
 	<script src="assets/js/fullcalendar.js"></script>
+	<script>
+	$(document).ready(function(){
+		jQuery('#country').change(function(){
+			var id=jQuery(this).val();
+			if(id=='-1'){
+				jQuery('#state').html('<option value="-1">Select State</option>');
+			}else{
+				$("#divLoading").addClass('show');
+				jQuery('#state').html('<option value="-1">Select State</option>');
+				jQuery('#city').html('<option value="-1">Select City</option>');
+				jQuery.ajax({
+					type:'post',
+					url:'get_data.php',
+					data:'cn='+id+'&type=state',
+					success:function(result){
+						$("#divLoading").removeClass('show');
+						jQuery('#state').append(result);
+					}
+				});
+			}
+		});
+		jQuery('#state').change(function(){
+			var id=jQuery(this).val();
+			if(id=='-1'){
+				jQuery('#city').html('<option value="-1">Select City</option>');
+			}else{
+				$("#divLoading").addClass('show');
+				jQuery('#city').html('<option value="-1">Select City</option>');
+				jQuery.ajax({
+					type:'post',
+					url:'get_data.php',
+					data:'cn='+id+'&type=city',
+					success:function(result){
+						$("#divLoading").removeClass('show');
+						jQuery('#city').append(result);
+					}
+				});
+			}
+		});
+	});
+	</script>
+
 </body>
 </html>
 <?php } ?>

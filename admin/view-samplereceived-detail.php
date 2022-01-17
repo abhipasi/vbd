@@ -170,8 +170,8 @@ if($row->Status=="Delivered to Lab")
   </tr>
    <tr>
     
-<th >Prescription</th>
-    <td><a href="../user/images/<?php echo $row->Prescription;?>" target="_blank">Download Prescription</a></td>
+<!-- <th >Prescription</th>
+    <td><a href="../user/images/<?php echo $row->Prescription;?>" target="_blank">Download Prescription</a></td> -->
 <th >Report Status</th>
     <?php if($row->Status=="Report Uploaded"){ ?>
 <td>
@@ -304,7 +304,7 @@ if ($status=="Delivered to Lab"){
   </tr> 
     <tr>
     <th>Upload Report :</th>
-    <td><input type="file" name="report" class="form-control wd-450" required="true">
+    <td><input type="file" name="report" class="form-control wd-450" required="false">
     </td>
   </tr> 
  
